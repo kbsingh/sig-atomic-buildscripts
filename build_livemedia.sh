@@ -37,8 +37,8 @@ python -m SimpleHTTPServer 8000 &
 rpm-ostree-toolbox imagefactory --overwrite --tdl ${GitDir}/atomic-7.1.tdl -c  ${GitDir}/config.ini -i kvm -k ${GitDir}/live.ks -o ${BuildDir}/virt |& tee ${LogFile}
 
 # copy the image off, convert to RAW, have livemedia-creator have a go.
-mkdir ${BuildDir}/live
-cat ${BuildDir}/virt/centos-atomic-host-7.qcow2.gz | gunzip > ${BuildDir}/live/qcow2
+mkdir -p ${BuildDir}/live
+cat ${BuildDir}/virt/images/centos-atomic-host-7.qcow2.gz | gunzip > ${BuildDir}/live/qcow2
 qemu-img convert -O raw ${BuildDir}/live/qcow2 ${BuildDir}/live/raw
 /usr/sbin/livemedia-creator --make-ostree-live --disk-image=${BuildDir}/live/raw --live-rootfs-keep-size --resultdir=${BuildDir}/live/out
 
