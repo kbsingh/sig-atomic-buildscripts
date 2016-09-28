@@ -40,6 +40,7 @@ rpm-ostree-toolbox imagefactory --overwrite --tdl ${GitDir}/atomic-7.1.tdl -c  $
 mkdir -p ${BuildDir}/live
 cat ${BuildDir}/virt/images/centos-atomic-host-7.qcow2.gz | gunzip > ${BuildDir}/live/qcow2
 qemu-img convert -O raw ${BuildDir}/live/qcow2 ${BuildDir}/live/raw
+rm -rf ${BuildDir}/live/out
 /usr/sbin/livemedia-creator --make-ostree-live --disk-image=${BuildDir}/live/raw --live-rootfs-keep-size --resultdir=${BuildDir}/live/out
 
 # This does not currently work, due to issues in ImgFac:
